@@ -99,14 +99,37 @@ export function LuxuryBanner({
                     <video
                         ref={(el) => {
                           videoRefs.current[index] = el;
+
+                          if (index === currentSlide && el) {
+                            el.oncanplay = () => {
+                              requestAnimationFrame(() => {
+                                el.play().catch(() => {});
+                              });
+                            };
+                          }
                         }}
-                        src={process.env.API_URL+slide.src}
-                        autoPlay={index === currentSlide}
+                        src={process.env.API_URL + slide.src}
                         muted
                         loop
                         playsInline
+                        preload="auto"
+                        poster="/videoPlaceholder.jpg"
                         className="banner-video"
-                    ></video>
+                    />
+
+                    {/*<video*/}
+                    {/*    ref={(el) => {*/}
+                    {/*      videoRefs.current[index] = el;*/}
+                    {/*    }}*/}
+                    {/*    src={process.env.API_URL+slide.src}*/}
+                    {/*    autoPlay={index === currentSlide}*/}
+                    {/*    muted*/}
+                    {/*    loop*/}
+                    {/*    playsInline*/}
+                    {/*    preload={"auto"}*/}
+                    {/*    poster={'/videoPlaceholder.jpg'}*/}
+                    {/*    className="banner-video"*/}
+                    {/*></video>*/}
                     <div className="banner-overlay"></div>
                   </div>
               )}

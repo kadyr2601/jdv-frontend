@@ -89,7 +89,7 @@ export async function generateMetadata(): Promise<Metadata> {
             url: seo?.og_url || fallback.url,
         },
         other: {
-            'structured-data': [
+            'application/ld+json': [
                 JSON.stringify(websiteStructuredData),
                 JSON.stringify(organizationData)
             ]

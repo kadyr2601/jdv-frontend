@@ -1,0 +1,15 @@
+
+
+/* Переопределяем шрифт Lato для совместимости со старыми CSS */
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato');
+    font-display: swap;
+}
+
+/* Переопределяем шрифт Jost для совместимости со старыми CSS */
+@font-face {
+    font-family: 'Jost';
+    src: local('Jost');
+    font-display: swap;
+}

@@ -4,7 +4,7 @@ type Project = {
     id: number;
     title: string;
     slug: string;
-    image: string;
+    card_image: string;
     structured_data?: Record<string, any>;
     banner_image?: string;
 };
@@ -59,6 +59,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1,
         },
         {
+            url: `${baseUrl}/about`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 1,
+        },
+        {
             url: `${baseUrl}/projects`,
             lastModified: currentDate,
             changeFrequency: 'weekly',
@@ -66,12 +72,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${baseUrl}/contacts`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/about`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.7,
@@ -84,10 +84,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: currentDate,
         changeFrequency: 'weekly',
         priority: 1,
-        images: [
-            `${baseUrl}${project.image}`,
-            ...(project.banner_image ? [`${baseUrl}${project.banner_image}`] : []),
-        ],
+        // images: [
+        //     `${baseUrl}${project.card_image}`,
+        //     ...(project.banner_image ? [`${baseUrl}${project.banner_image}`] : []),
+        // ],
     }));
 
     const services = await fetchServices();
@@ -96,9 +96,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: currentDate,
         changeFrequency: 'weekly',
         priority: 1,
-        images: [
-            `${baseUrl}${service.main_image}`,
-        ],
+        // images: [
+        //     `${baseUrl}${service.main_image}`,
+        // ],
     }));
 
     return [...staticRoutes, ...projectRoutes, ...serviceRoutes];
