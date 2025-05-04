@@ -18,7 +18,6 @@ import Footer from "@/components/Footer";
 import TopUpButton from "@/components/topUpButton";
 import SocialMedias from "@/components/SocialMedias";
 import { lato, jost } from '@/components/fonts';
-import {Service} from "@/types/services";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -39,76 +38,6 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
 
-    const API_URL = process.env.API_URL!
-
-    // Fetch services for JSON-LD
-    let services: Service[] = []
-    try {
-        const servicesRes = await fetch(`${API_URL}/api/services`, {
-            cache: "no-cache",
-            signal: AbortSignal.timeout(5000),
-        })
-
-        if (servicesRes.ok) services = await servicesRes.json().catch(() => [])
-    } catch (e) {
-        console.error("Services fetch error:", e)
-    }
-
-    // Create JSON-LD data
-    const hasPart = [
-        {
-            "@type": "WebPage",
-            name: "About Us",
-            description: "Learn about JDV interior design studio in Dubai",
-            url: `${API_URL}/about`,
-        },
-        {
-            "@type": "WebPage",
-            name: "Projects",
-            description: "View our portfolio of interior design and architecture projects",
-            url: `${API_URL}/projects`,
-        },
-        {
-            "@type": "WebPage",
-            name: "Contact Us",
-            description: "Get in touch with our interior design team",
-            url: `${API_URL}/contacts`,
-        },
-        ...(Array.isArray(services) && services.length > 0
-            ? services.map((s) => ({
-                "@type": "WebPage",
-                name: s.name,
-                description: s.description,
-                url: `${API_URL}/services/${s.slug}`,
-            }))
-            : []),
-    ]
-
-    const websiteStructuredData = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "JDV - Joie De Vivre",
-        url: API_URL,
-        hasPart,
-    }
-
-    const organizationData = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "JDV - Joie De Vivre",
-        url: API_URL,
-        logo: `${API_URL}/media/logo.png`,
-        description: "Interior design, fit-out, and architecture services in Dubai.",
-        address: {
-            "@type": "PostalAddress",
-            addressLocality: "Dubai",
-            addressCountry: "UAE",
-        },
-        sameAs: [
-            "https://www.instagram.com/jdv_dubai?igsh=aWl4cTAxM2RibHFu&utm_source=qr",
-            "https://api.whatsapp.com/send/?phone=971554073275&text=Hello%2C%20I%20am%20interested%20in%20your%20interior%20design%20services.&app_absent=0",
-        ],
-    }
     return (
         <html lang="en">
         {/*<head>*/}
@@ -122,11 +51,6 @@ export default async function RootLayout({
         {/*    />*/}
         {/*</head>*/}
         <body className={`bootstrap-body page ttm-bgcolor-darkgrey ${lato.className} ${jost.className}`}>
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
-        />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }} />
         <Header/>
         <div className="site-main">
             {children}
