@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = process.env.HostName;
 
     return {
         rules: [
@@ -11,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: [], // Block sensitive areas
             }
         ],
-        sitemap: `${baseUrl}/sitemap.xml`, // Link to your sitemap
+        sitemap: `https://site-preview.site/sitemap.xml`, // Link to your sitemap
     };
 }
