@@ -16,9 +16,11 @@ type Service = {
     main_image: string;
 };
 
+const baseUrl = 'https://site-preview.site';
+
 async function fetchProjects(): Promise<Project[]> {
     try {
-        const res = await fetch(`${process.env.API_URL}/api/projects/`, {
+        const res = await fetch(`${baseUrl}/api/projects/`, {
             next: { revalidate: 3600 },
         });
         if (!res.ok) {
@@ -34,7 +36,7 @@ async function fetchProjects(): Promise<Project[]> {
 
 async function fetchServices(): Promise<Service[]> {
     try {
-        const res = await fetch(`${process.env.API_URL}/api/services/`, {
+        const res = await fetch(`${baseUrl}/api/services/`, {
             next: { revalidate: 3600 }, // Revalidate every hour
         });
         if (!res.ok) {
@@ -48,7 +50,6 @@ async function fetchServices(): Promise<Service[]> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.HostName;
     const currentDate = new Date().toISOString();
 
     const staticRoutes: MetadataRoute.Sitemap = [
