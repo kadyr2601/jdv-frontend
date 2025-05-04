@@ -141,7 +141,7 @@ export default function BeforeAfterSection({ data }: { data: BeforeAfter }) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-6 col-md-12">
+                    <div className="col-lg-6 col-md-12" style={{ display: imageHeight === 300 ? 'none' : 'block' }}>
                         <div className="ttm-bg ttm-col-bgcolor-yes ttm-bgcolor-darkgrey ttm-right-span spacing-3">
                             <div className="ttm-col-wrapper-bg-layer ttm-bg-layer"></div>
                             <div className="layer-content"></div>

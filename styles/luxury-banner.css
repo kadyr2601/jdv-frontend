@@ -5,6 +5,13 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    height: 100vh !important;
+}
+
+@media screen and (max-width: 991px){
+    .luxury-banner {
+        height: 40vh !important;
+    }
 }
 
 /* Стили для слайдов */
@@ -69,6 +76,7 @@
     padding: 0 20px;
 }
 
+
 /* Выравнивание контента */
 .content-left {
     text-align: left;
@@ -103,10 +111,18 @@
     flex-direction: column;
     text-align: right;
     align-items: flex-end;
+
+    @media (max-width: 991px) {
+        display: none;
+    }
 }
 
 .split-right {
     width: 100%;
+
+    @media (max-width: 991px) {
+        text-align: center;
+    }
 }
 
 @media (min-width: 768px) {
@@ -143,7 +159,7 @@
 
 .banner-title {
     color: white;
-    font-size: 44px;
+    font-size: 27px;
     font-weight: 700;
     margin-bottom: 16px;
     opacity: 0;
@@ -155,7 +171,7 @@
 
 .banner-subtitle {
     color: white;
-    font-size: 36px;
+    font-size: 27px;
     font-weight: 700;
     margin-bottom: 24px;
     opacity: 0;
@@ -171,6 +187,10 @@
     opacity: 0;
     animation: fadeIn 0.8s ease-out forwards;
     animation-delay: 0.9s;
+
+    @media screen and (max-width: 991px){
+        display: none;
+    }
 }
 
 /* Кнопки и ссылки */
@@ -243,6 +263,10 @@
     border: none;
     cursor: pointer;
     transition: color 0.3s;
+
+    @media (max-width: 991px) {
+        display: none;
+    }
 }
 
 .banner-arrow:hover {
@@ -277,6 +301,10 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s;
+
+    @media screen and (max-width: 991px){
+        display: none;
+    }
 }
 
 .banner-dot:hover {
@@ -327,4 +355,32 @@
     .banner-subtitle {
         font-size: 60px;
     }
+}
+
+@media screen and (max-width: 991px){
+    .content-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .banner-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .banner-title {
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    .banner-category {
+        margin-bottom: 0;
+    }
+
+
 }

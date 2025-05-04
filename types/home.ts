@@ -53,7 +53,7 @@ export interface FeaturedProject {
     project: { slug: string; };
 }
 
-export interface AboutInteriorBanner {
+interface AboutInteriorBanner {
     id: number;
     title: string;
     description: string;

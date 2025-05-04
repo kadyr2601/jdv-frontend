@@ -4,23 +4,23 @@ const nextConfig: NextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'http',
-                hostname: '127.0.0.1',
-                port: '8000',
-                pathname: '/media/**',
-
-                // protocol: 'https',
-                // hostname: 'site-preview.site',
-                // port: '',
+                // protocol: 'http',
+                // hostname: '127.0.0.1',
+                // port: '8000',
                 // pathname: '/media/**',
+
+                protocol: 'https',
+                hostname: 'site-preview.site',
+                port: '',
+                pathname: '/media/**',
             },
         ],
     },
     env: {
-        API_URL: "http://127.0.0.1:8000",
-        HostName: "http://localhost:3000",
-        // HostName: "https://site-preview.site",
-        // API_URL: "https://site-preview.site",
+        // API_URL: "http://127.0.0.1:8000",
+        // HostName: "http://localhost:3000",
+        HostName: "https://site-preview.site",
+        API_URL: "https://site-preview.site",
     },
 };
 

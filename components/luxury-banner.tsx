@@ -52,14 +52,7 @@ export function LuxuryBanner({
     }
   };
 
-  const [height, setHeight] = useState<number>(100);
-
   useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth <= 768) {
-      setHeight(50);
-    } else {
-      setHeight(100);
-    }
     // Start autoplay
     startAutoplayTimer();
 
@@ -77,7 +70,7 @@ export function LuxuryBanner({
   }, [currentSlide, autoplay, autoplaySpeed, slides]);
 
   return (
-      <div className="luxury-banner" style={{ height: `${height}vh` }}>
+      <div className="luxury-banner">
         {/* Slides */}
         {slides.map((slide, index) => (
             <div
@@ -112,24 +105,10 @@ export function LuxuryBanner({
                         muted
                         loop
                         playsInline
-                        preload="auto"
+                        preload="none"
                         poster="/videoPlaceholder.jpg"
                         className="banner-video"
                     />
-
-                    {/*<video*/}
-                    {/*    ref={(el) => {*/}
-                    {/*      videoRefs.current[index] = el;*/}
-                    {/*    }}*/}
-                    {/*    src={process.env.API_URL+slide.src}*/}
-                    {/*    autoPlay={index === currentSlide}*/}
-                    {/*    muted*/}
-                    {/*    loop*/}
-                    {/*    playsInline*/}
-                    {/*    preload={"auto"}*/}
-                    {/*    poster={'/videoPlaceholder.jpg'}*/}
-                    {/*    className="banner-video"*/}
-                    {/*></video>*/}
                     <div className="banner-overlay"></div>
                   </div>
               )}

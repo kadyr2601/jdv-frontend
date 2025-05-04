@@ -47,17 +47,17 @@ const Footer: React.FC = async () => {
                   padding: 0,
                 }}>
                   <li style={{width:'100%'}}>
-                    <Link href="/about" target="_blank" rel="noopener noreferrer">
+                    <Link href="/about">
                       About Us
                     </Link>
                   </li>
                   <li style={{width:'100%'}}>
-                    <Link href="/projects" target="_blank" rel="noopener noreferrer">
+                    <Link href="/projects">
                       Projects
                     </Link>
                   </li>
                   <li style={{width:'100%'}}>
-                    <Link href="/contacts" target="_blank" rel="noopener noreferrer">
+                    <Link href="/contacts">
                       Contact Us
                     </Link>
                   </li>

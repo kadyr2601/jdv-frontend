@@ -40,7 +40,6 @@ export default function AboutSection({ data }: AboutSectionProps) {
                                 src={`${process.env.API_URL}${data.image}`}
                                 alt="single_01"
                                 sizes="(max-width: 768px) 100vw, 520px"
-                                priority
                             />
                         </div>
                     </div>
