@@ -8,102 +8,51 @@ import {ProjectsPageData} from "@/types/projects";
 
 export async function generateMetadata(): Promise<Metadata> {
     const API_URL = process.env.API_URL;
-    let seo: SEO | null = null;
-    let projects: ProjectsPageData | null = null;
-    const fallback = {
-        title: 'JDV - Projects Portfolio',
-        description: 'Explore our portfolio of interior design, fit-out, and architecture projects in Dubai.',
-        url: `${API_URL}/projects`,
+
+    const fallbackMetadata = {
+        title: 'JDV - Joie De Vivre',
+        description: 'Learn about our interior design, fit-out, and architecture services in Dubai.',
+        keywords: ['interior design', 'architecture', 'Dubai'],
+        openGraph: {
+            title: 'JDV - Joie De Vivre',
+            description: 'Learn about our interior design, fit-out, and architecture services in Dubai.',
+            images: [`${API_URL}/media/logo.png`],
+            url: `${API_URL}/projects`,
+        },
     };
 
     try {
-        // Параллельно запрашиваем SEO данные и все проекты
-        const [seoRes, projectsRes] = await Promise.all([
-            fetch(`${API_URL}/api/others/seo/projects`, {cache: 'no-cache'}),
-            fetch(`${API_URL}/api/projects`, {cache: 'no-cache'})
-        ]);
+        const res = await fetch(`${API_URL}/api/others/seo/projects`, {cache: 'no-cache'});
 
-        if (seoRes.ok) seo = await seoRes.json().catch(() => null);
-        if (projectsRes.ok) projects = await projectsRes.json().catch(() => []);
-    } catch (e) {
-        console.error('Projects metadata fetch error:', e);
-    }
-
-    // Создаем структурированные данные для страницы проектов
-    const collectionPageStructuredData = {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        'name': seo?.meta_title || fallback.title,
-        'description': seo?.meta_description || fallback.description,
-        'url': seo?.og_url || fallback.url,
-        'isPartOf': {
-            '@type': 'WebSite',
-            'name': 'JDV - Joie De Vivre',
-            'url': API_URL
+        // Check if the response is OK
+        if (!res.ok) {
+            console.error('API returned error status:', res.status);
+            return fallbackMetadata;
         }
-    };
 
-    // Добавляем BreadcrumbList
-    const breadcrumbStructuredData = {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        'itemListElement': [
-            {
-                '@type': 'ListItem',
-                'position': 1,
-                'name': 'Home',
-                'item': API_URL
+        const seo: SEO = await res.json();
+
+        // Validate that the required fields exist
+        if (!seo || !seo.meta_title) {
+            console.error('API returned incomplete SEO data');
+            return fallbackMetadata;
+        }
+
+        return {
+            title: seo.meta_title,
+            description: seo.meta_description || fallbackMetadata.description,
+            keywords: seo.meta_keywords ? seo.meta_keywords.split(',').map((keyword) => keyword.trim()) : fallbackMetadata.keywords,
+            openGraph: {
+                title: seo.og_title || seo.meta_title || fallbackMetadata.openGraph.title,
+                description: seo.og_description || seo.meta_description || fallbackMetadata.openGraph.description,
+                images: seo.og_image ? [`${process.env.API_URL}${seo.og_image}`] : fallbackMetadata.openGraph.images,
+                url: seo.og_url || fallbackMetadata.openGraph.url,
             },
-            {
-                '@type': 'ListItem',
-                'position': 2,
-                'name': 'Projects',
-                'item': seo?.og_url || fallback.url
-            }
-        ]
-    };
-
-    // Создаем ItemList для всех проектов
-    const projectsStructuredData = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        'itemListElement': Array.isArray(projects) ? projects.map((project, index) => ({
-            '@type': 'ListItem',
-            'position': index + 1,
-            'item': {
-                '@type': 'CreativeWork',
-                'name': project.title,
-                'url': `${API_URL}/projects/${project.slug}`,
-                'image': project.card_image ? `${API_URL}${project.card_image}` : undefined
-            }
-        })) : []
-    };
-
-    return {
-        title: seo?.meta_title || fallback.title,
-        description: seo?.meta_description || fallback.description,
-        keywords: seo?.meta_keywords?.split(',').map(k => k.trim()) || [],
-        openGraph: {
-            title: seo?.og_title || seo?.meta_title || fallback.title,
-            description: seo?.og_description || seo?.meta_description || fallback.description,
-            images: seo?.og_image ? [`${API_URL}${seo.og_image}`] : [],
-            url: seo?.og_url || fallback.url,
-            type: 'website',
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: seo?.og_title || seo?.meta_title || fallback.title,
-            description: seo?.og_description || seo?.meta_description || fallback.description,
-            images: seo?.og_image ? [`${API_URL}${seo.og_image}`] : [],
-        },
-        other: {
-            'structured-data': [
-                JSON.stringify(collectionPageStructuredData),
-                JSON.stringify(breadcrumbStructuredData),
-                JSON.stringify(projectsStructuredData)
-            ]
-        }
-    };
+        };
+    } catch (error) {
+        console.error('Error fetching SEO metadata:', error);
+        return fallbackMetadata;
+    }
 }
 
 async function getProjectsData(): Promise<ProjectsPageData> {
