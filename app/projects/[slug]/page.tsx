@@ -16,9 +16,10 @@ export async function generateMetadata({params,}: {params: Promise<{ slug: strin
     const { project } = await getProjectDetails(slug);
 
     return {
-        title: project.title,
+        title: project.meta_title,
+        description: project.meta_description,
         openGraph: {
-            title: project.title,
+            title: project.meta_title,
             images: [`${process.env.API_URL}${project.image}`],
             url: project.structured_data?.url,
         },

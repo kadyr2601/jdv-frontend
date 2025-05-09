@@ -5,6 +5,9 @@ export type Project = {
     image: string;
     structured_data: Record<string, any>;
     banner_image: string;
+    meta_title: string;
+    meta_description: string;
+
 };
 
 export type GalleryItem = {

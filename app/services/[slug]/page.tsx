@@ -22,11 +22,11 @@ export async function generateMetadata({params,}: { params: Promise<{ slug: stri
     const {service} = await getServiceDetails(slug);
 
     return {
-        title: service.name,
-        description: service.description,
+        title: service.meta_title,
+        description: service.meta_description,
         openGraph: {
-            title: service.name,
-            description: service.description,
+            title: service.meta_title,
+            description: service.meta_description,
             images: [`${process.env.API_URL}${service.main_image}`],
         },
     };
