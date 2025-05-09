@@ -84,11 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/projects/${project.slug}`,
         lastModified: currentDate,
         changeFrequency: 'weekly',
-        priority: 1,
-        // images: [
-        //     `${baseUrl}${project.card_image}`,
-        //     ...(project.banner_image ? [`${baseUrl}${project.banner_image}`] : []),
-        // ],
+        priority: 1
     }));
 
     const services = await fetchServices();
@@ -96,10 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/services/${service.slug}`,
         lastModified: currentDate,
         changeFrequency: 'weekly',
-        priority: 1,
-        // images: [
-        //     `${baseUrl}${service.main_image}`,
-        // ],
+        priority: 1
     }));
 
     return [...staticRoutes, ...projectRoutes, ...serviceRoutes];

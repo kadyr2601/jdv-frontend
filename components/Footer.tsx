@@ -3,13 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {Service} from "@/types/services";
 
-async function getServices(): Promise<Service[]> {
-  const res = await fetch(`${process.env.API_URL}/api/services/`, {cache: "no-cache"});
-  return res.json();
+interface FooterProps {
+  services: Service[];
 }
 
-const Footer: React.FC = async () => {
-  const services = await getServices();
+const Footer: React.FC<FooterProps> = ({ services }) => {
 
   return (
     <footer className="footer ttm-bg ttm-bgcolor-darkgrey widget-footer clearfix">

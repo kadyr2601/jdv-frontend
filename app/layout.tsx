@@ -19,6 +19,7 @@ import TopUpButton from "@/components/topUpButton";
 import SocialMedias from "@/components/SocialMedias";
 import { lato, jost } from '@/components/fonts';
 import {Metadata} from "next";
+import {Service} from "@/types/services";
 
 export const metadata: Metadata = {
     icons: {
@@ -38,26 +39,24 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
 
+    async function getServices(): Promise<Service[]> {
+        const res = await fetch(`${process.env.API_URL}/api/services/`, { cache: "no-cache" });
+        return res.json();
+    }
+
+    // Получаем сервисы
+    const services = await getServices();
+
     return (
         <html lang="en">
-        {/*<head>*/}
-        {/*    <link*/}
-        {/*        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"*/}
-        {/*        rel="stylesheet"*/}
-        {/*    />*/}
-        {/*    <link*/}
-        {/*        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"*/}
-        {/*        rel="stylesheet"*/}
-        {/*    />*/}
-        {/*</head>*/}
         <body className={`bootstrap-body page ttm-bgcolor-darkgrey ${lato.className} ${jost.className}`}>
-        <Header/>
+        <Header services={services} />
         <div className="site-main">
             {children}
         </div>
         <SocialMedias/>
         <TopUpButton/>
-        <Footer/>
+        <Footer services={services} />
         </body>
         </html>
     );
