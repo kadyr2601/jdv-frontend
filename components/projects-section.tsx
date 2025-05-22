@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
-
+import {FeaturedProject} from '@/lib/HomePage'
 interface Project {
   id: number
   title: string
@@ -93,7 +93,6 @@ export default function ProjectsSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1 })
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
 
-  // Parallax effect for background
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
