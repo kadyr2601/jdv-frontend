@@ -26,14 +26,14 @@ const navLinks = [
 
 const socialLinks = [
   {
-    href: "https://wa.me/971412345678",
+    href: "https://wa.me/971554073275",
     label: "WhatsApp",
     icon: MessageCircle,
     color: "bg-gold hover:bg-gold/90",
     textColor: "text-black",
   },
   {
-    href: "https://instagram.com/joiedevivre",
+    href: "https://www.instagram.com/jdv_dubai/?igsh=Y2pzcndvejB4OXpt#e",
     label: "Instagram",
     icon: Instagram,
     color: "bg-black border border-gold hover:bg-black/80",

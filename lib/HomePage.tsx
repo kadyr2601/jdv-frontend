@@ -14,22 +14,22 @@ export interface HomePageDTO {
     banner_subtitle: string;
     featured_projects: FeaturedProject[];
     testimonials: Testimonial[];
-    strategy_section: StrategySection[];
+    strategy_section: StrategySectionDTO[];
+    featured_projects_description: string;
+    testimonials_description:  string;
+    strategy_section_description: string;
 }
 
 export interface FeaturedProject {
-    id: number;
-    name: string;
-    slug: string;
-    cardImage: string;
-    year: string;
-    location: string;
-    category: string;
-    banner_image: string;
-    description: string;
-    meta_title: string;
-    meta_description: string;
-    area: string;
+    id: number
+    name: string
+    category: string
+    description: string
+    cardImage: string
+    slug: string
+    year: string
+    location: string
+    size: "normal" | "wide" | "tall"
 }
 
 export interface Testimonial {
@@ -43,15 +43,12 @@ export interface Testimonial {
     background_image: string;
 }
 
-export interface StrategySection {
+export interface StrategySectionDTO {
     id: number;
     title: string;
     description: string;
     image: string;
-    cta_first_title: string;
-    cta_first_description: string;
-    cta_second_title: string;
-    cta_second_description: string;
+    stats: {value: string, label: string}[]
 }
 
 export async function getHomePage(): Promise<HomePageDTO> {

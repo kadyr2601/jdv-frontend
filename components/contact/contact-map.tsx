@@ -1,10 +1,8 @@
 "use client"
-
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import Image from "next/image"
 
-export default function ContactMap() {
+export default function ContactMap({old}: {old: string}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.2 })
 
@@ -23,7 +21,7 @@ export default function ContactMap() {
             Our <span className="text-gold">Location</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Visit our design studio in the heart of Dubai Design District, where creativity and luxury converge.
+            {old}
           </p>
         </motion.div>
 
@@ -35,17 +33,16 @@ export default function ContactMap() {
         >
           {/* Map image - in a real implementation, this would be replaced with an actual map component */}
           <div className="relative w-full h-full border border-[#222222]">
-            {/*<Image src="/bg.png" alt="Map of our location" fill className="object-cover" />*/}
 
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.723667342036!2d55.1372983759725!3d25.03255387782364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b173e6e8dd7%3A0x26448ae7f0ed728f!2sDiscovery%20Gardens%2C%20Jebel%20Ali%20Village%2C%20Dubai!5e0!3m2!1sen!2sae!4v1715686420005!5m2!1sen!2sae"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.1054337289723!2d55.15515607597307!3d25.09558797779095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b71dd93a709%3A0x8969379aa62dc2c2!2sBusiness%20Central%20Towers%20B%2C%20Dubai%20Internet%20City%2C%20Dubai%2C%20UAE!5e0!3m2!1sen!2sae!4v1716380851052!5m2!1sen!2sae"
                 width="100%"
                 height="100%"
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="absolute inset-0 w-full h-full"
-            ></iframe>
+            />
 
             {/* Map overlay with location pin */}
             <div className="absolute inset-0 bg-black/20"></div>
@@ -83,10 +80,10 @@ export default function ContactMap() {
 
           <div className="mt-8 inline-block">
             <a
-              href="https://maps.google.com/?q=Dubai+Design+District"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-6 py-3 bg-[#0a0a0a] border border-gold/30 hover:bg-gold/10 rounded-full transition-all duration-300 text-gold"
+                href="https://www.google.com/maps?q=Business+Central+Towers+B,+Dubai+Internet+City"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-6 py-3 bg-[#0a0a0a] border border-gold/30 hover:bg-gold/10 rounded-full transition-all duration-300 text-gold"
             >
               <span>Get Directions</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -36,9 +36,9 @@ export default async function Home() {
             />
             <AboutSection/>
             <ServicesSection/>
-            <ProjectsSection/>
-            <TestimonialsSection/>
-            <StrategySection/>
+            <ProjectsSection projects={page.featured_projects} description={page.featured_projects_description}/>
+            <TestimonialsSection props={page.testimonials} description={page.testimonials_description}/>
+            <StrategySection features={page.strategy_section} description={page.strategy_section_description}/>
         </main>
     )
 }

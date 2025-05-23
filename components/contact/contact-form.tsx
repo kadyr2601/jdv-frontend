@@ -16,7 +16,7 @@ export default function ContactForm() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.2 })
   const [formState, setFormState] = useState({
-    name: "",
+    fullname: "",
     email: "",
     phone: "",
     service: "",
@@ -34,25 +34,37 @@ export default function ContactForm() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/others/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      })
 
-    // Reset form and show success message
-    setFormState({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    })
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+      if (!response.ok) {
+        throw new Error("Failed to send message")
+      }
 
-    // Reset success message after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-    }, 5000)
+      setFormState({
+        fullname: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      })
+
+      setIsSubmitted(true)
+      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      alert("There was a problem sending your message. Please try again later.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
 
   return (
     <section ref={ref} className="py-24 bg-black relative">
@@ -111,9 +123,9 @@ export default function ContactForm() {
                       Full Name <span className="text-gold">*</span>
                     </label>
                     <Input
-                      id="name"
-                      name="name"
-                      value={formState.name}
+                      id="fullname"
+                      name="fullname"
+                      value={formState.fullname}
                       onChange={handleChange}
                       placeholder="Your name"
                       required
@@ -240,9 +252,7 @@ export default function ContactForm() {
           >
             <p>
               By submitting this form, you agree to our{" "}
-              <Link href="/privacy" className="text-gold hover:underline">
                 Privacy Policy
-              </Link>
               . We respect your privacy and will never share your information with third parties.
             </p>
           </motion.div>

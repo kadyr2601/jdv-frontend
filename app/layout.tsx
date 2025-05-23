@@ -26,6 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+    <head>
+      <link rel="icon" href="/logo.png?<generated>" type="image/png" sizes="32x32"/>
+    </head>
       <body className={`${lato.variable} font-lato`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />

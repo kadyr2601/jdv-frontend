@@ -48,7 +48,6 @@ export default function AboutSection() {
   return (
     <section ref={sectionRef} className="py-32 bg-black relative overflow-hidden">
       {/* Luxury marble texture background */}
-      {/*<div className="absolute inset-0 bg-[url('/about-2.png')] bg-cover bg-center opacity-[0.03]"></div>*/}
 
       {/* Gold accent lines */}
       <div className="absolute top-0 left-[10%] w-px h-32 bg-gradient-to-b from-transparent via-gold/30 to-transparent"></div>

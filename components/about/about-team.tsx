@@ -12,65 +12,9 @@ interface TeamMember {
   position: string
   image: string
   bio: string
-  social: {
-    linkedin?: string
-    instagram?: string
-    email?: string
-  }
 }
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: "Mihaela Isachi",
-    position: "Founder & CEO",
-    image: "/about-ceo-img.jpg",
-    bio: "With over 15 years of experience in luxury interior design, Mihaela brings a wealth of knowledge and a keen eye for detail to every project.",
-    social: {
-      linkedin: "https://linkedin.com/in/mihaelaisachi",
-      instagram: "https://instagram.com/mihaelaisachi",
-      email: "mihaela@joiedevivre.ae",
-    },
-  },
-  {
-    id: 2,
-    name: "Alexandra Petrova",
-    position: "Creative Director",
-    image: "/team2.webp",
-    bio: "Alexandra's innovative approach to design has earned her recognition throughout the industry. She specializes in blending contemporary and classic elements.",
-    social: {
-      linkedin: "https://linkedin.com/in/alexandrapetrova",
-      instagram: "https://instagram.com/alexandrapetrova",
-      email: "alexandra@joiedevivre.ae",
-    },
-  },
-  {
-    id: 3,
-    name: "Ahmed Al Falasi",
-    position: "Head of Architecture",
-    image: "/team4.jpg",
-    bio: "With a background in both traditional and modern architecture, Ahmed brings a unique perspective to our architectural projects.",
-    social: {
-      linkedin: "https://linkedin.com/in/ahmedalfalasi",
-      instagram: "https://instagram.com/ahmedalfalasi",
-      email: "ahmed@joiedevivre.ae",
-    },
-  },
-  {
-    id: 4,
-    name: "Sophia Williams",
-    position: "Senior Interior Designer",
-    image: "/team3.webp",
-    bio: "Sophia's attention to detail and passion for creating functional yet beautiful spaces has made her an invaluable member of our design team.",
-    social: {
-      linkedin: "https://linkedin.com/in/sophiawilliams",
-      instagram: "https://instagram.com/sophiawilliams",
-      email: "sophia@joiedevivre.ae",
-    },
-  },
-]
-
-export default function AboutTeam() {
+export default function AboutTeam({teamMembers, desc}: {teamMembers: TeamMember[],  desc: string}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.2 })
   const [activeTeamMember, setActiveTeamMember] = useState<number | null>(null)
@@ -104,8 +48,7 @@ export default function AboutTeam() {
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold/70 to-transparent mx-auto mb-6"></div>
 
           <p className="text-white/70 max-w-2xl mx-auto">
-            Our team of talented professionals is dedicated to delivering excellence in every aspect of our work. From
-            concept to completion, we are committed to craftsmanship, creativity, and attention to detail.
+            {desc}
           </p>
         </motion.div>
 
@@ -124,7 +67,7 @@ export default function AboutTeam() {
                 {/* Member image */}
                 <div className="absolute inset-0">
                   <Image
-                    src={member.image || "/placeholder.svg"}
+                    src={process.env.API_URL+member.image}
                     alt={member.name}
                     fill
                     className={`object-cover transition-all duration-700 ${
@@ -155,38 +98,6 @@ export default function AboutTeam() {
                     }`}
                   >
                     <p className="text-white/70 text-sm mb-4">{member.bio}</p>
-
-                    {/* Social links */}
-                    <div className="flex space-x-3">
-                      {member.social.linkedin && (
-                        <Link
-                          href={member.social.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-gold/20 flex items-center justify-center text-white hover:bg-gold/20 transition-colors"
-                        >
-                          <Linkedin className="h-4 w-4" />
-                        </Link>
-                      )}
-                      {member.social.instagram && (
-                        <Link
-                          href={member.social.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-gold/20 flex items-center justify-center text-white hover:bg-gold/20 transition-colors"
-                        >
-                          <Instagram className="h-4 w-4" />
-                        </Link>
-                      )}
-                      {member.social.email && (
-                        <Link
-                          href={`mailto:${member.social.email}`}
-                          className="w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-gold/20 flex items-center justify-center text-white hover:bg-gold/20 transition-colors"
-                        >
-                          <Mail className="h-4 w-4" />
-                        </Link>
-                      )}
-                    </div>
                   </div>
                 </div>
 

@@ -96,11 +96,11 @@ export default function ProjectDetail({project, gallery}: ProjectDetails) {
             </AnimatePresence>
 
             {/* Project Header */}
-            <section className="relative md:py-32 ">
+            <section className="relative md:py-32 h-[600px] md:h-auto">
                 <div className="absolute inset-0 bg-[url('/projectBanner.png')] bg-cover bg-center opacity-[0.4]"></div>
 
-                <div className="container mx-auto px-4 md:px-6 relative z-10">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16">
+                <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex items-center">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 w-full">
                         <div>
                             <Link
                                 href="/projects"

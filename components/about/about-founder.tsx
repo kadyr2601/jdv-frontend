@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
-export default function AboutFounder() {
+export default function AboutFounder({img, words}: {img: string, words: string}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.2 })
   const [isQuoteExpanded, setIsQuoteExpanded] = useState(false)
@@ -75,7 +75,7 @@ export default function AboutFounder() {
               <div className="relative mx-auto max-w-sm lg:max-w-full">
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <Image
-                    src="/about-ceo-img.jpg"
+                    src={process.env.API_URL+img}
                     alt="Mihaela Isachi - Founder & CEO"
                     fill
                     className="object-cover"
@@ -111,63 +111,61 @@ export default function AboutFounder() {
                 <div className="absolute -top-4 -left-4 text-gold text-6xl opacity-20">"</div>
 
                 <div className="space-y-6">
-                  <p className="text-xl leading-relaxed text-white/90 font-light">
-                    As the founder and CEO, I am thrilled to share with you our passion for interior design, fit-out
-                    services, and architecture. Since our establishment in 2018, we have dedicated ourselves to turning
-                    our customers' visions into reality.
+                  <p className="text-xl leading-relaxed text-white/90 font-light whitespace-pre-wrap">
+                    {words}
                   </p>
 
-                  <AnimatePresence>
-                    {isQuoteExpanded ? (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="space-y-6">
-                          <p className="leading-relaxed text-white/80 font-light">
-                            For me, interior design is not just a profession; it's a passion. There's nothing quite like
-                            the feeling of bringing a client's dream space to life. The joy and satisfaction that come
-                            from seeing their faces light up when they step into their newly designed environment are
-                            unparalleled.
-                          </p>
+                  {/*<AnimatePresence>*/}
+                  {/*  {isQuoteExpanded ? (*/}
+                  {/*    <motion.div*/}
+                  {/*      initial={{ opacity: 0, height: 0 }}*/}
+                  {/*      animate={{ opacity: 1, height: "auto" }}*/}
+                  {/*      exit={{ opacity: 0, height: 0 }}*/}
+                  {/*      transition={{ duration: 0.5 }}*/}
+                  {/*      className="overflow-hidden"*/}
+                  {/*    >*/}
+                  {/*      <div className="space-y-6">*/}
+                  {/*        <p className="leading-relaxed text-white/80 font-light">*/}
+                  {/*          For me, interior design is not just a profession; it's a passion. There's nothing quite like*/}
+                  {/*          the feeling of bringing a client's dream space to life. The joy and satisfaction that come*/}
+                  {/*          from seeing their faces light up when they step into their newly designed environment are*/}
+                  {/*          unparalleled.*/}
+                  {/*        </p>*/}
 
-                          <p className="leading-relaxed text-white/80 font-light">
-                            Thank you for considering JDV - Joie De Vivre for your interior design, fit-out, and
-                            architecture needs. We look forward to the opportunity to collaborate with you and bring
-                            your vision to life.
-                          </p>
-                        </div>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
+                  {/*        <p className="leading-relaxed text-white/80 font-light">*/}
+                  {/*          Thank you for considering JDV - Joie De Vivre for your interior design, fit-out, and*/}
+                  {/*          architecture needs. We look forward to the opportunity to collaborate with you and bring*/}
+                  {/*          your vision to life.*/}
+                  {/*        </p>*/}
+                  {/*      </div>*/}
+                  {/*    </motion.div>*/}
+                  {/*  ) : null}*/}
+                  {/*</AnimatePresence>*/}
 
-                  <div>
-                    <button
-                      onClick={() => setIsQuoteExpanded(!isQuoteExpanded)}
-                      className="inline-flex items-center space-x-2 text-gold hover:text-gold/80 transition-colors border border-gold/30 px-4 py-2 rounded-sm hover:bg-gold/5"
-                    >
-                      <span>{isQuoteExpanded ? "Read Less" : "Read More"}</span>
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`transform transition-transform duration-300 ${isQuoteExpanded ? "rotate-180" : ""}`}
-                      >
-                        <path
-                          d="M6 9l6 6 6-6"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+                  {/*<div>*/}
+                  {/*  <button*/}
+                  {/*    onClick={() => setIsQuoteExpanded(!isQuoteExpanded)}*/}
+                  {/*    className="inline-flex items-center space-x-2 text-gold hover:text-gold/80 transition-colors border border-gold/30 px-4 py-2 rounded-sm hover:bg-gold/5"*/}
+                  {/*  >*/}
+                  {/*    <span>{isQuoteExpanded ? "Read Less" : "Read More"}</span>*/}
+                  {/*    <svg*/}
+                  {/*      width="16"*/}
+                  {/*      height="16"*/}
+                  {/*      viewBox="0 0 24 24"*/}
+                  {/*      fill="none"*/}
+                  {/*      xmlns="http://www.w3.org/2000/svg"*/}
+                  {/*      className={`transform transition-transform duration-300 ${isQuoteExpanded ? "rotate-180" : ""}`}*/}
+                  {/*    >*/}
+                  {/*      <path*/}
+                  {/*        d="M6 9l6 6 6-6"*/}
+                  {/*        stroke="currentColor"*/}
+                  {/*        strokeWidth="1.5"*/}
+                  {/*        strokeLinecap="round"*/}
+                  {/*        strokeLinejoin="round"*/}
+                  {/*      />*/}
+                  {/*    </svg>*/}
+                  {/*  </button>*/}
+                  {/*</div>*/}
 
                   <div className="pt-6 mt-6 border-t border-gold/10">
                     <div className="text-right">

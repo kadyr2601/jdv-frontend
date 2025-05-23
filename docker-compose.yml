@@ -7,4 +7,4 @@ services:
     ports:
       - 3000:3000
     restart: always
-    command: sh -c "npm install && npm i sharp && npx next telemetry disable && npm run build && npm start"
+    command: sh -c "pnpm i sharp && npx next telemetry disable && pnpm run build && pnpm start"
